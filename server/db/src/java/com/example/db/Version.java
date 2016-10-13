@@ -15,10 +15,10 @@ public class Version {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
-
-        String url = "jdbc:mysql://localhost:3306/wijs_reservation";
-        String user = "dbuser";
-        String password = "dbpassword";
+        
+        String url = DBParms.getInstance().getUrl();
+        String user = DBParms.getInstance().getUser();
+        String password = DBParms.getInstance().getPassword();
 
         try {
             
@@ -28,7 +28,7 @@ public class Version {
 
             if (rs.next()) {
                 
-                System.out.println("WIJS: MySQL Version is:  " + rs.getString(1));
+                System.out.println("WIJS 222: MySQL Version is:  " + rs.getString(1));
             }
 
         } catch (SQLException ex) {
