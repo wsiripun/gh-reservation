@@ -14,7 +14,8 @@ public class HelloWorldServlet extends HttpServlet
 	public void service( HttpServletRequest request, HttpServletResponse response )
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		out.println( "<html><body>Hello World WIJS 1111 HELLO WORLD</body></html>" );
+		// Add new line.
+		out.println( "<html><body>Hello World WIJS 1111 MODIFIED HELLO WORLD</body></html>" );
 //		response.sendRedirect("http://www.cnn.com"); 
 		out.close();
 	}
