@@ -1,4 +1,4 @@
-package com.example.db;
+package com.example.common;
 
 public class DBParms {
     private String url = "jdbc:mysql://localhost:3306/wijs_reservation";
