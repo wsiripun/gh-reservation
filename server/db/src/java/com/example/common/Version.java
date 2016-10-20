@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.mysql.jdbc.Driver;
+
 public class Version {
 
     public static void main(String[] args) {
@@ -21,15 +23,17 @@ public class Version {
         String password = DBParms.getInstance().getPassword();
 
         try {
-            
+            Driver jdbcDriver = new com.mysql.jdbc.Driver ();
+        	DriverManager.registerDriver(jdbcDriver);
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT VERSION()");
 
             if (rs.next()) {
                 
-                System.out.println("WIJS 222: MySQL Version is:  " + rs.getString(1));
+                System.out.println("WIJS 444: MySQL Version is:  " + rs.getString(1));
             }
+            DriverManager.deregisterDriver(jdbcDriver);;
 
         } catch (SQLException ex) {
         
