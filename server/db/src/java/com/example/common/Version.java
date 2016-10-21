@@ -31,7 +31,7 @@ public class Version {
 
             if (rs.next()) {
                 
-                System.out.println("WIJS 444: MySQL Version is:  " + rs.getString(1));
+                System.out.println("WIJS 000 10/20: MySQL Version is:  " + rs.getString(1));
             }
             DriverManager.deregisterDriver(jdbcDriver);;
 

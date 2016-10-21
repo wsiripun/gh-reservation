@@ -34,7 +34,7 @@ public class ReservationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		PrintWriter out = response.getWriter();
-		out.println( "<html><body>Hello World WIJS 10/19 5555   ReservationServlet  </body></html>" );
+		out.println( "<html><body>Hello World WIJS 10/20 99999   ReservationServlet  </body></html>" );
 //		response.sendRedirect("http://www.cnn.com"); 
 		out.close();
 		

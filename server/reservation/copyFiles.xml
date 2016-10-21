@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<project name="Hello World Project" default="info">
+	
+	<property name="deploy.location" value="../.metadata/.plugins/org.eclipse.wst.server.core/tmp0/webapps"/>
+
+	<property name="db.location" value="../db" />
+	
+	
+	<target name="info">
+		<echo>Hello World - Welcome to Apache Ant!</echo>
+		<echo>Ant Version is ${ant.version}</echo>
+	</target>
+	
+    <target name="all"
+         depends="copy_jar, copy_db, copy_reservation">
+    </target>
+	
+	<target name="copy_jar">
+		<copy file="../supportLibrary/mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar"
+			  todir="WebContent/WEB-INF/lib"/>
+
+	</target>
+
+	<target name="copy_db">
+		<copy todir="WebContent/WEB-INF/classes">
+			<fileset dir="${db.location}/build/classes" />
+		</copy>
+	</target>
+	
+	<target name="copy_reservation">
+		<copy todir="WebContent/WEB-INF/classes">
+			<fileset dir="build/classes" />
+		</copy>
+	</target>
+	
+	<target name="deploy">
+		<copy 
+			file="reservation.war"
+			todir="${deploy.location}"/>
+	</target>
+	
+	</project>
