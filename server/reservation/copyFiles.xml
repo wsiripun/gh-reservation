@@ -10,6 +10,7 @@
 	<target name="info">
 		<echo>Hello World - Welcome to Apache Ant!</echo>
 		<echo>Ant Version is ${ant.version}</echo>
+		<echo>basedir=${basedir}</echo>
 	</target>
 	
     <target name="all"
