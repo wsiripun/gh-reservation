@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Hello World Project" default="info">
+
+	<!-- TODO:
+
+	-->
+
+	<property file="build.properties"/>
+
+	<!-- define classpath for compiling project db -->
+	<path id="db-classpath">
+		<pathelement path="../supportLibrary\mysql-connector-java-5.1.38\mysql-connector-java-5.1.38-bin.jar" />
+	</path>
+	
+	<!-- define classpath for compiling project reservation -->
+	<path id="reservation-classpath">
+		<pathelement path="../supportLibrary\mysql-connector-java-5.1.38\mysql-connector-java-5.1.38-bin.jar" />
+		<pathelement path="${tomcat.home}/lib/servlet-api.jar"/>
+		<pathelement path="../db/build/classes"/>
+	</path>
+
+
+
+	<target name="info">
+		<echo>======== Reservation Build =========</echo>
+		<echo>TOMCAT_HOME=${tomcat.home}====</echo>
+		<echo>Servlet=${tomcat.home}/lib/servlet-api.jar====</echo>
+	</target>
+	
+	<target name="all"  depends="clean, compile, package, deploy">
+	
+	</target>
+
+	<target name="deploy" depends="package">
+
+	</target>
+
+	<target name="package" depends="compile">
+		<ant antfile="copyFiles.xml" target="all" />
+		<war destfile = "reservation.war">
+
+		   <fileset dir = "WebContent">
+		      <include name = "**/*.*"/>
+		   </fileset>
+		   <!--
+		   <lib dir = "thirdpartyjars">
+		      <exclude name = "portlet.jar"/>
+		   </lib>
+		   
+		   <classes dir = "${build.dir}/web"/>
+		   -->
+		   
+		</war>
+	</target>
+	
+
+	<target name="clean">
+		<delete dir="../db/build" />
+		<delete dir="build" />
+		<delete dir="WebContent/WEB-INF/lib" />
+		<delete dir="WebContent/WEB-INF/classes" />
+		<mkdir dir="../db/build/classes" />
+		<mkdir dir="build/classes" />
+		<mkdir dir="WebContent/WEB-INF/lib" />
+		<mkdir dir="WebContent/WEB-INF/classes" />
+	</target>
+
+	<target name="compile" depends="compile.1, compile.2">
+	</target>
+
+	<target name="compile.1">
+		<javac srcdir="../db/src/java" 
+				destdir="../db/build/classes" 
+				includeantruntime="false"
+	         	classpathref="db-classpath" />
+	</target>
+
+
+	<target name="compile.2">
+		<javac srcdir="src/java" 
+				destdir="build/classes" 
+				includeantruntime="false"
+				classpathref="reservation-classpath" />
+	</target>
+
+
+
+</project>
+
