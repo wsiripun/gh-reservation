@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Hello World Project" default="info">
+<project name="Build Reservation System" default="all">
 
-	<!-- TODO:
-
-	-->
 
 	<property file="build.properties"/>
+	<property name="deploy.location" value="../.metadata/.plugins/org.eclipse.wst.server.core/tmp0/webapps"/>
+
 
 	<!-- define classpath for compiling project db -->
 	<path id="db-classpath">
@@ -21,9 +20,8 @@
 	</path>
 
 
-
+	<!-- "info" left here for debugging -->
 	<target name="info">
-		<echo>======== Reservation Build =========</echo>
 		<echo>TOMCAT_HOME=${tomcat.home}====</echo>
 		<echo>Servlet=${tomcat.home}/lib/servlet-api.jar====</echo>
 	</target>
@@ -39,18 +37,9 @@
 	<target name="package" depends="compile">
 		<ant antfile="copyFiles.xml" target="all" />
 		<war destfile = "reservation.war">
-
 		   <fileset dir = "WebContent">
 		      <include name = "**/*.*"/>
 		   </fileset>
-		   <!--
-		   <lib dir = "thirdpartyjars">
-		      <exclude name = "portlet.jar"/>
-		   </lib>
-		   
-		   <classes dir = "${build.dir}/web"/>
-		   -->
-		   
 		</war>
 	</target>
 	
@@ -66,10 +55,10 @@
 		<mkdir dir="WebContent/WEB-INF/classes" />
 	</target>
 
-	<target name="compile" depends="compile.1, compile.2">
+	<target name="compile" depends="compile.db, compile.reservation">
 	</target>
 
-	<target name="compile.1">
+	<target name="compile.db">
 		<javac srcdir="../db/src/java" 
 				destdir="../db/build/classes" 
 				includeantruntime="false"
@@ -77,7 +66,7 @@
 	</target>
 
 
-	<target name="compile.2">
+	<target name="compile.reservation">
 		<javac srcdir="src/java" 
 				destdir="build/classes" 
 				includeantruntime="false"

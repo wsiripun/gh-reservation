@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
-<project name="Hello World Project" default="info">
+<project name="Copy Files to WebContent" default="info">
 	
-	<property name="deploy.location" value="../.metadata/.plugins/org.eclipse.wst.server.core/tmp0/webapps"/>
+	
 
 	<property name="db.location" value="../db" />
 	
@@ -33,12 +33,6 @@
 		<copy todir="WebContent/WEB-INF/classes">
 			<fileset dir="build/classes" />
 		</copy>
-	</target>
-	
-	<target name="deploy">
-		<copy 
-			file="reservation.war"
-			todir="${deploy.location}"/>
 	</target>
 	
 	</project>
