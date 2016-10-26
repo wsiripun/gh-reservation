@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.example.common.Version;
+import com.example.dao.AttendantDAO;
+import com.example.model.Attendant;
 
 /**
  * Servlet implementation class ReservationServlet
@@ -18,29 +20,37 @@ import com.example.common.Version;
 //@WebServlet("/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ReservationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		PrintWriter out = response.getWriter();
-		out.println( "<html><body>Hello World WIJS 10/20 99999   ReservationServlet  </body></html>" );
-//		response.sendRedirect("http://www.cnn.com"); 
-		out.close();
-		
+		out.println( "<html><body>ReservationServlet 10/24 1111 ******     </body></html>" );
+		String serverAction = request.getParameter("serverAction");
+		System.out.println ("WIJS serverAction=" + serverAction);
+		if (serverAction.equalsIgnoreCase("RequestTicket")) {
+			System.out.println("WIJS: hit RequestTicket");
+			Attendant attendant = new Attendant();
+			attendant.setFirstName(request.getParameter("fname"));
+			attendant.setLastName(request.getParameter("lname"));
+			boolean returnCode = (new AttendantDAO()).createAttendant(attendant);
+			if (returnCode) {
+				System.out.println ("WIJS: Create Ticket Success ++++ ");
+			} else {
+				System.out.println ("WIJS: Create Ticket FAILED ----- ");
+			}
+		} else if (serverAction.equalsIgnoreCase("ListAll")) {
+			System.out.println("WIJS: hit ListAll");
+		}
 		String[] abc = {"a" };
 		
 		Version.main(abc);
+		out.close();
 	}
 
 	/**
@@ -54,19 +64,6 @@ public class ReservationServlet extends HttpServlet {
 }
 
 
-
-//@SuppressWarnings("serial")
-//public class ReservationServlet extends HttpServlet{
-//	@Override
-//	public void service( HttpServletRequest request, HttpServletResponse response )
-//			throws ServletException, IOException {
-//		PrintWriter out = response.getWriter();
-//		out.println( "<html><body>Hello World WIJS 10/19 1111 REAL ONE  !</body></html>" );
-////		response.sendRedirect("http://www.cnn.com"); 
-//		out.close();
-//	}
-//	
-//}
 
 
 
